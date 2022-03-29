@@ -3,6 +3,8 @@ import 'registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
+
+
 class WelcomeScreen extends StatefulWidget {
 
   static String id = "/welcome";
@@ -12,6 +14,17 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+
+@override
+  void initState() {
+    // TODO: implement initState
+  // Firebase.initializeApp();
+
+
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

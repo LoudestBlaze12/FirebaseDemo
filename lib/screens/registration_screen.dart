@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 class RegistrationScreen extends StatefulWidget {
 
   static String id = "/registration";
@@ -9,6 +10,25 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+
+  @override
+  void initState()  {
+    // TODO: implement initState
+     startFirebase();
+
+    super.initState();
+  }
+
+  void startFirebase() async {
+    await Firebase.initializeApp();
+    print("Firebase was init properly");
+  }
+
+
+  // final _auth = FirebaseAuth.instance;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

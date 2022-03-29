@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "260515813340",
+    "project_id": "firechat-7a873",
+    "storage_bucket": "firechat-7a873.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260515813340:android:22350965746baa7abba119",
+        "android_client_info": {
+          "package_name": "co.blixtstudios.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260515813340-7aeed2t4a942bo1l8rpgba1r6kofi92f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoMTp9R9--Fz6M5vNl7-NvXchpIi4clgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260515813340-7aeed2t4a942bo1l8rpgba1r6kofi92f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
