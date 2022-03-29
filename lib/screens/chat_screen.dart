@@ -47,7 +47,26 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
 
+  void messagesStream() async {
 
+    //Loop to find all the documents in the collection
+    await for (var snapshot in _cloud.collection('messages').snapshots() )
+    {
+      //  For loop to retrieve dat from snap shot
+      for (var messages in snapshot.docs) {
+        print(messages.data());
+      }
+
+    }
+  }
+
+
+@override
+  void initState() {
+    // TODO: implement initState
+  messagesStream();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +103,24 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+
+                  // StreamBuilder<QuerySnapshot>(
+                  //   stream: _cloud.collection('messages').snapshots(),
+                  //   builder: (context, snapshot){
+                  //     if (snapshot.hasData) {
+                  //
+                  //     final messages = snapshot.data.docs;
+                  //
+                  //     List<Text> messagesWidgets = [];
+                  //
+                  //     for (var message in messages) {
+                  //       final messageText = message.data['text'];
+                  //
+                  //     }
+                  //     }
+                  //     return Column();
+                  //   },
+                  // ),
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
@@ -95,7 +132,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       //Implement send functionality.
 
