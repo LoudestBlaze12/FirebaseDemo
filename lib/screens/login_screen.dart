@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flash_chat/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'chat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -9,6 +12,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  String _user;
+  String _password;
+  bool _saving = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,65 +28,49 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            //Logo Asset
             Container(
               height: 200.0,
               child: Image.asset('images/logo.png'),
             ),
+
+            //Visual Spacer
             SizedBox(
               height: 48.0,
             ),
+
+            //Username Text Field
             TextField(
+              textAlign: TextAlign.center,
               onChanged: (value) {
-                //Do something with the user input.
+                //Does something with the user input.
+                _user = value;
               },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
+              decoration: kInputTextField.copyWith(hintText: "Enter your email"),
             ),
+
+            //Visual Spacer
             SizedBox(
               height: 8.0,
             ),
+
+            //Password Text Field
             TextField(
+              textAlign: TextAlign.center,
+              obscureText: true,
               onChanged: (value) {
-                //Do something with the user input.
+                //Does something with the user input.
+                _password = value;
               },
-              decoration: InputDecoration(
-                hintText: 'Enter your password.',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
+              decoration: kInputTextField.copyWith(hintText: "Enter your password"),
             ),
+
+            //Visual Spacer
             SizedBox(
               height: 24.0,
             ),
+
+            //Login Button
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
@@ -87,6 +80,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     //Implement login functionality.
+
+                    try {
+                      _auth.signInWithEmailAndPassword(email: _user, password: _password);
+                      Navigator.pushNamed(context, ChatScreen.id);
+                    }
+                    catch(e) {
+                      print(e);
+                      print('Trouble signing in');
+                    }
+
                   },
                   minWidth: 200.0,
                   height: 42.0,
@@ -96,6 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+
+
           ],
         ),
       ),
