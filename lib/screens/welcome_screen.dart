@@ -1,3 +1,5 @@
+import 'package:flash_chat/screens/login_screen.dart';
+import 'registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -22,11 +24,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
+
                 Container(
                   child: Image.asset('images/logo.png'),
                   height: 60.0,
                 ),
 
+                //Welcome Screen Header
                 SizedBox(
         width: 275.0,
         child: DefaultTextStyle(
@@ -46,7 +50,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
         ),
       ),
+
               ],
+
             ),
             SizedBox(
               height: 48.0,
@@ -59,6 +65,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
                   onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
                     //Go to login screen.
                   },
                   minWidth: 200.0,
@@ -77,6 +84,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () {
+
+                    Navigator.pushNamed(context, RegistrationScreen.id);
+
                     //Go to registration screen.
                   },
                   minWidth: 200.0,
