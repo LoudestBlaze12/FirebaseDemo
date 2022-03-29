@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -22,13 +23,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Image.asset('images/logo.png'),
                   height: 60.0,
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+
+                SizedBox(
+        width: 275.0,
+        child: DefaultTextStyle(
+          style: const TextStyle(
+            color: Colors.blue,
+            fontSize: 50.0,
+            fontWeight: FontWeight.w900,
+          ),
+          child: AnimatedTextKit(
+            animatedTexts: [
+              TypewriterAnimatedText('Flash Chat'),
+
+            ],
+            onTap: () {
+              print("Tap Event");
+            },
+          ),
+        ),
+      ),
               ],
             ),
             SizedBox(
