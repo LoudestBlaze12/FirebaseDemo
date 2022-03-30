@@ -27,7 +27,7 @@ class FlashChat extends StatelessWidget {
       //   ),
       // ),
 
-      initialRoute: WelcomeScreen.id,
+      initialRoute: ChatScreen.id,
 
 
       routes: {

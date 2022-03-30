@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -64,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
 @override
   void initState() {
     // TODO: implement initState
-  messagesStream();
+  // messagesStream();
     super.initState();
   }
 
@@ -72,6 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
 
     var sender = _auth.currentUser.email;
+    List<Padding> messagesListWidgets = [];
 
 
     return Scaffold(
@@ -83,10 +85,10 @@ class _ChatScreenState extends State<ChatScreen> {
               onPressed: () {
                 //Implement logout functionality
 
-                // _auth.signOut();
-                // Navigator.pop(context);
+                _auth.signOut();
+                Navigator.pop(context);
 
-                getMessages();
+                // getMessages();
 
               }),
         ],
@@ -98,29 +100,71 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+
+            StreamBuilder <QuerySnapshot> (
+              stream: _cloud.collection('messages').snapshots(),
+              builder: (context, snapshot){
+
+                if (snapshot.hasData) {
+
+
+
+                  for (DocumentSnapshot mess in snapshot.data.docs){
+                    // final messageText = mess.data['text'];
+                    final messageSender = mess.get('sender');
+                    final messageText = mess.get('text');
+
+
+
+                    final messageWidget = Padding(padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Text("this message, $messageText was sent by $messageSender",
+                      style: TextStyle(
+                      ),
+                    ),);
+                    messagesListWidgets.add(messageWidget);
+
+                  }
+
+
+                }
+                return Column(
+                    children: messagesListWidgets,
+
+                );
+              },
+            ),
+
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 
-                  // StreamBuilder<QuerySnapshot>(
+
+
+                  // StreamBuilder <QuerySnapshot> (
                   //   stream: _cloud.collection('messages').snapshots(),
                   //   builder: (context, snapshot){
                   //     if (snapshot.hasData) {
+                  //       final  messages = snapshot.data.docs;
+                  //       List<Text> messagesWidgets = [];
+                  //       for (var mess in messages){
+                  //         final messageText = mess;
+                  //         print(mess);
+                  //       }
                   //
-                  //     final messages = snapshot.data.docs;
-                  //
-                  //     List<Text> messagesWidgets = [];
-                  //
-                  //     for (var message in messages) {
-                  //       final messageText = message.data['text'];
                   //
                   //     }
-                  //     }
+                  //
                   //     return Column();
                   //   },
                   // ),
+
+
+                  // TextField to enter your message
+
+
+
                   Expanded(
                     child: TextField(
                       onChanged: (value) {

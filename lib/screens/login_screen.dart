@@ -78,11 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(30.0)),
                 elevation: 5.0,
                 child: MaterialButton(
-                  onPressed: () {
+                  onPressed: () async {
                     //Implement login functionality.
 
                     try {
-                      _auth.signInWithEmailAndPassword(email: _user, password: _password);
+                      await _auth.signInWithEmailAndPassword(email: _user, password: _password);
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
                     catch(e) {
